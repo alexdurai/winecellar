@@ -1,0 +1,17 @@
+from .utils import run
+
+def apply_dll_overrides(name, bottle_dir, cfg):
+    overrides = cfg["dll_overrides"]
+    reg = bottle_dir / "dll_overrides.reg"
+
+    with open(reg, "w") as f:
+        f.write("Windows Registry Editor Version 5.00\n\n")
+        f.write("[HKEY_CURRENT_USER\\Software\\Wine\\DllOverrides]\n")
+        for dll in overrides["dlls"]:
+            f.write(f"\"{dll}\"=\"{overrides['mode']}\"\n")
+
+    run([
+        "bottles-cli", "run",
+        "-b", name,
+        "--", "regedit", str(reg)
+    ])

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61", "setuptools-scm[toml]>=8"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "winecellar"
+version = "0.1.0"
+description = "Single-user Bottles maintenance tool"
+authors = [
+    {name="Alex Durai", email="alexdurai@gmail.com"}
+]
+dependencies = [
+    # add any runtime dependencies here
+    "PyYAML",
+    "tqdm",
+]
+#dynamic = ["version"]
+
+[tool.setuptools_scm]
+version_scheme = "guess-next-dev"
+local_scheme = "node-and-date"
+
+[project.scripts]
+winecellar = "winecellar.cli:main"
+

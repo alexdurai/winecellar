@@ -1,0 +1,130 @@
+bottle:
+  name: Windows32
+  location: /mnt/Apps/Linux/Bottles
+  environment: custom
+  arch: win32
+  runner: soda-9.0.1
+  windows_version: win10
+
+features:
+  dxvk: true
+  vkd3d: true
+  nvapi: false
+  gamemode: false
+  fsync: true
+  esync: true
+  pulseaudio_latency: 60
+
+logging:
+  level: 4                 # 1–5
+  log_dir: ~/.local/state/winecellar/logs
+  file: winecellar.log
+  console: true
+  
+graphics:
+  renderer: vulkan
+  dxvk_hud: false
+  dxvk_async: true
+
+environment:
+  DXVK_ASYNC: "1"
+  MESA_GL_VERSION_OVERRIDE: "4.6"
+
+dll_overrides:
+  mode: native,builtin
+  dlls:
+  - foo_out_pulse
+  - foo_vis_spectrum_analyzer
+  - foo_dsp_dither
+  - foo_youtube
+  - foo_dsp
+  - foo_dither
+  - foo_preview
+  - foo_enhanced_playcount
+  - foo_external_tags
+  - foo_input_sacd
+  - foo_dsp_crossmix
+  - foo_input_ffmpeg
+  - foo_musicbrainz
+  - foo_dsp_eqsplit
+  - foo_uie_albumlist
+  - foo_masstag
+  - foo_out_upnp
+  - foo_dsp_effect
+  - foo_metronome
+  - foo_dsp_utility
+  - foo_out_spatial
+  - foo_tagbox
+  - foo_ac3
+  - foo_asap
+  - foo_input_dts
+  - foo_quicktag
+  - foo_beefweb
+  - foo_renamer
+  - foo_chronflow
+  - foo_seek_box
+  - foo_discogs
+  - foo_input_tta
+  - foo_spider_monkey_panel
+  - foo_dsd_processor
+  - foo_ui_columns
+  - foo_openlyrics
+  - foo_uie_tagger_mod
+  - foo_uie_webview
+  - foo_dsp_subwoofer
+  - foo_out_wasapis
+  - foo_popup_panels
+  - foo_wave_minibar_mod
+  - foo_whatsnew
+  - foo_converter
+  - foo_fileops
+  - foo_dsp_eq
+  - foo_freedb2
+  - foo_ui_std
+  - foo_dsp_std
+  - foo_input_std
+  - foo_unpack
+
+
+dpi:
+  enabled: true
+  scale: 120            # Windows DPI (96, 120, 144, 192)
+  hidpi: true
+  winecfg: true         # apply via winecfg
+
+
+drives:
+  C:
+    path: drive_c        # relative to bottle root
+    type: hd
+  D:
+    path: /mnt/Apps
+    type: hd
+  E:
+    path: /mnt/Music
+    type: hd
+  F:
+    path: /mnt/Media
+    type: hd
+    readonly: true
+
+
+dependencies:
+  winetricks:
+    - d3dcompiler_47
+    - d3dx9
+    - directshow
+    - vcrun2022
+    - dotnet48
+    - gdiplus
+    - ie8
+    - webview2
+    - ffdshow
+    - lavfilters
+    - allfonts
+
+backup:
+  enabled: true
+  path: ~/Backups/winecellar
+  compress: true
+  keep_last: 5
